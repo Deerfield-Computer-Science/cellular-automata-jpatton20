@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.util.ArrayList;
 
+import acm.util.RandomGenerator;
+
 public abstract class LifeForm {
 	
 	protected World myWorld;
@@ -62,6 +64,51 @@ public abstract class LifeForm {
 	public void setMyLocation(Location myLocation) {
 		this.myLocation = myLocation;
 	}
+	
+	public void move() {
+		int y; 
+		int x;
+		x= getMyLocation().getX()+rgen.nextInt(-1, 1);
+		y= getMyLocation().getY()+rgen.nextInt(-1, 1);
+		
+		Location L = new Location(x, y);
+		
+		setMyLocation(L);
+		
+	}
+	
+	public void infect() {
+		int infectivity;
+		if(checker==true) {
+			if(yearsOld>60) {
+				infectivity=rgen.nextInt(0, 2);
+				if (infectivity==1) {
+					//creature is dead, new symptomatic
+				}
+			}
+			else if(yearsOld>30) {
+					infectivity=rgen.nextInt(0, 10);
+					if (infectivity==1 || infectivity==2) {
+						//creature is dead, new asymptomatic
+					}
+					if(infectivity==3) {
+						//creature is dead, new symptomatic
+			}
+			else {
+					infectivity=rgen.nextInt(0, 10);
+					if (infectivity==1) {
+						//creature is dead, new symptomatic
+					}
+					if (infectivity==2) {
+						//creature is dead, new asymptomatic
+					}
+			}
+				
+			}
+		}
+	}
+	
+	private RandomGenerator rgen = RandomGenerator.getInstance();
 	
 	public Color getMyColor() {
 		return myColor;

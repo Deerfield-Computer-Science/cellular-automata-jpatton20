@@ -8,8 +8,8 @@ public class WorldController extends GraphicsProgram {
 	
 	private World theWorld;
 	private GCanvas theWorldCanvas;
-	public static final int APPLICATION_WIDTH = 200;
-	public static final int APPLICATION_HEIGHT = 200;
+	public static final int APPLICATION_WIDTH = 700;
+	public static final int APPLICATION_HEIGHT = 700;
 	
 	public void run(){	
 		setUpWorld();
@@ -21,17 +21,19 @@ public class WorldController extends GraphicsProgram {
 	}
 	
 	public void setUpWorld(){
-		theWorld = new World(20,20);
-		theWorld.getCreatureList().add( new Grass( new Location(3,6), theWorld ));
-		theWorld.getCreatureList().add( new Grass( new Location(4,6), theWorld ));
-		theWorld.getCreatureList().add( new Hawk( new Location(2,6), theWorld ));
-		theWorld.getCreatureList().add( new Bear( new Location(5,6), theWorld ));
+		theWorld = new World(70,70);
+		theWorld.getCreatureList().add( new Symptomatic( new Location(50,60), theWorld ));
+		theWorld.getCreatureList().add( new Symptomatic( new Location(40,50), theWorld ));
+		theWorld.getCreatureList().add( new Symptomatic( new Location(30,40), theWorld ));
+		theWorld.getCreatureList().add(new Asymptomatic(new Location(20,30), theWorld));
+		theWorld.getCreatureList().add(new Asymptomatic(new Location(10,20), theWorld));
+
 		theWorldCanvas = this.getGCanvas();
 	}
 	
 	public void runWorld(){
 		drawWorld();
-		for(int i=0; i<3;i++){
+		for(int i=0; i<50;i++){
 			theWorld.letTimePass();
 			pause(500);
 			drawWorld();
@@ -41,6 +43,13 @@ public class WorldController extends GraphicsProgram {
 	public void drawWorld(){
 		drawBlankWorld();
 		drawCreatures();
+		move();
+	}
+	
+	public void move() {
+		for(int m=0; m<theWorld.getCreatureList().size(); m++) {
+			theWorld.getCreatureList().get(m).move();
+		}
 	}
 	
 	public void drawBlankWorld(){
