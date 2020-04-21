@@ -2,7 +2,7 @@ import java.awt.Color;
 
 import acm.util.RandomGenerator;
 
-public class Symptomatic extends Virus {
+public class Symptomatic extends Person {
 	
 	public Symptomatic(Location l, World w) {
 		super(l,w);

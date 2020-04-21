@@ -35,11 +35,12 @@ public abstract class LifeForm {
 	 */
 	
 	// we all age the same, time clicks forward and we all age one unit of time
-	public void age(int time){
+/*	public void age(int time){
 		myAge+=time;
 		if (myAge>myLifeSpan)
 			alive=false;
 	}
+	*/
 	
 	// to be alive you have to be able to reproduce....
 	public abstract void reproduce();
@@ -77,38 +78,49 @@ public abstract class LifeForm {
 		
 	}
 	
-	public void infect() {
+	public void infect(int i) {
 		int infectivity;
-		if(checker==true) {
-			if(yearsOld>60) {
+			if(myWorld.getCreatureList().get(i).getAge()>70) {
 				infectivity=rgen.nextInt(0, 2);
 				if (infectivity==1) {
 					//creature is dead, new symptomatic
+					myWorld.getCreatureList().get(i).isDead();
+					myWorld.getCreatureList().add( new Symptomatic( new Location(30,40), myWorld ));
 				}
 			}
-			else if(yearsOld>30) {
+			else if(myWorld.getCreatureList().get(i).getAge()>30) {
 					infectivity=rgen.nextInt(0, 10);
 					if (infectivity==1 || infectivity==2) {
 						//creature is dead, new asymptomatic
+						myWorld.getCreatureList().get(i).isDead();
+						myWorld.getCreatureList().add( new Symptomatic( new Location(30,40), myWorld ));
 					}
 					if(infectivity==3) {
-						//creature is dead, new symptomatic
+						//creature is dead, new asymptomatic
+						myWorld.getCreatureList().get(i).isDead();
+						myWorld.getCreatureList().add( new Asymptomatic( new Location(30,40), myWorld ));
 			}
 			else {
 					infectivity=rgen.nextInt(0, 10);
 					if (infectivity==1) {
 						//creature is dead, new symptomatic
+						myWorld.getCreatureList().get(i).isDead();
+						myWorld.getCreatureList().add( new Symptomatic( new Location(30,40), myWorld ));
 					}
 					if (infectivity==2) {
+						myWorld.getCreatureList().get(i).isDead();
+						myWorld.getCreatureList().add( new Asymptomatic( new Location(30,40), myWorld ));
 						//creature is dead, new asymptomatic
 					}
 			}
 				
-			}
 		}
 	}
 	
-	public void checkSurroundings() {
+	
+	private RandomGenerator rgen = RandomGenerator.getInstance();
+	
+public void checkSurroundings() {
 		
 		for(int i = 0; i < myWorld.getCreatureList().size(); i++) {
 			
@@ -153,8 +165,6 @@ public abstract class LifeForm {
 		}
 		
 	}
-	
-	private RandomGenerator rgen = RandomGenerator.getInstance();
 	
 	public Color getMyColor() {
 		return myColor;
