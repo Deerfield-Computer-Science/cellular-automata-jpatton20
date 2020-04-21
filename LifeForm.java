@@ -108,6 +108,52 @@ public abstract class LifeForm {
 		}
 	}
 	
+	public void checkSurroundings() {
+		
+		for(int i = 0; i < myWorld.getCreatureList().size(); i++) {
+			
+			for(int j = i+1; j < myWorld.getCreatureList().size(); j++) {
+				
+				//Checks if on the same box
+				if((myWorld.getCreatureList().get(i).myLocation.getX() == myWorld.getCreatureList().get(j).myLocation.getX()) && (myWorld.getCreatureList().get(i).myLocation.getY() == myWorld.getCreatureList().get(j).myLocation.getY())) {
+					
+					System.out.println("There is a creature on me");
+					
+				}
+				
+				//Checks box on top
+				if((myWorld.getCreatureList().get(i).myLocation.getX() == myWorld.getCreatureList().get(j).myLocation.getX()) && (myWorld.getCreatureList().get(i).myLocation.getY() == myWorld.getCreatureList().get(j).myLocation.getY()-1)) {
+					
+					System.out.println("There is a creature under me");
+					
+				}
+				
+				//Checks box under
+				if((myWorld.getCreatureList().get(i).myLocation.getX() == myWorld.getCreatureList().get(j).myLocation.getX()) && (myWorld.getCreatureList().get(i).myLocation.getY() == myWorld.getCreatureList().get(j).myLocation.getY()+1)) {
+					
+					System.out.println("There is a creature above me");
+					
+				}
+				
+				//Checks box to the right
+				if((myWorld.getCreatureList().get(i).myLocation.getX() == myWorld.getCreatureList().get(j).myLocation.getX()+1) && (myWorld.getCreatureList().get(i).myLocation.getY() == myWorld.getCreatureList().get(j).myLocation.getY())) {
+					
+					System.out.println("There is a creature to my left");
+					
+				}
+				
+				//Checks box to the left
+				if((myWorld.getCreatureList().get(i).myLocation.getX() == myWorld.getCreatureList().get(j).myLocation.getX()-1) && (myWorld.getCreatureList().get(i).myLocation.getY() == myWorld.getCreatureList().get(j).myLocation.getY())) {
+					
+					System.out.println("There is a creature to my right");
+					
+				}
+			}
+			
+		}
+		
+	}
+	
 	private RandomGenerator rgen = RandomGenerator.getInstance();
 	
 	public Color getMyColor() {
